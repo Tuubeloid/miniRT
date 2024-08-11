@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/11 20:29:15 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:29:59 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "libft/libft.h"
 # include "libft/GNL/get_next_line.h"
-
-// here make a struct definition to hold all elements
-// make a struct definition to hold all the map data
 
 typedef struct s_ambient
 {
@@ -94,8 +91,6 @@ typedef struct s_cylinder
 	int     b;
 }               t_cylinder;
 
-// lets create a main struct which will hold all the elements, there might be muleltiple nodes of most of the elements
-
 typedef struct s_map
 {
 	t_ambient   *ambient;
@@ -105,7 +100,5 @@ typedef struct s_map
 	t_plane     **plane;
 	t_cylinder  **cylinder;
 }               t_map;
-
-// make a struct definition here to hold all the map data
 
 #endif
