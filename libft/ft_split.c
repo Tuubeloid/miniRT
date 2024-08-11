@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:12:11 by tvalimak          #+#    #+#             */
-/*   Updated: 2023/11/17 21:18:35 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:43:14 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**new_arr;
 	size_t	items;
-	size_t	i;
 
-	i = 0;
 	if (s == NULL)
 		return (0);
 	items = ft_count_items(s, c);

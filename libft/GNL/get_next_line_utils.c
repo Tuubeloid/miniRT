@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:58:24 by tvalimak          #+#    #+#             */
-/*   Updated: 2023/12/15 18:33:56 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:05:02 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	dealloc(t_list **dump, t_list *clean_node, char *buf)
 		free(*dump);
 		*dump = tmp;
 	}
-	if (clean_node->content[0])
+	if (((char *)(clean_node->content))[0])
 		*dump = clean_node;
 	else
 	{
@@ -99,10 +99,10 @@ void	ft_polish_dump(t_list **dump)
 	}
 	i = 0;
 	k = 0;
-	while (last_node->content[i] && last_node->content[i] != '\n')
+	while (((char *)(last_node->content))[i] && ((char *)(last_node->content))[i] != '\n')
 		i++;
-	while (last_node->content[i] && last_node->content[i++])
-		buf[k++] = last_node->content[i];
+	while (((char *)(last_node->content))[i] && ((char *)(last_node->content))[i++])
+		buf[k++] = ((char *)(last_node->content))[i];
 	buf[k] = '\0';
 	dealloc(dump, clean_node, buf);
 }

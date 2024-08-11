@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+         #
+#    By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/14 18:17:29 by tvalimak          #+#    #+#              #
-#    Updated: 2023/11/14 18:37:06 by tvalimak         ###   ########.fr        #
+#    Updated: 2024/08/11 19:30:58 by tvalimak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c ft_lstlast_
 
 OBJS = ${SRCS:.c=.o}
 OBJS_BONUS = ${BONUS:.c=.o}
+GNL = get_next_line.c 
 NAME = libft.a
 LIBC = ar rcs
 CC = cc

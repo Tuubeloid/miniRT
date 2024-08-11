@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/15 16:56:42 by tvalimak          #+#    #+#             */
-/*   Updated: 2023/12/15 18:34:12 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:49:30 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
-typedef struct s_list
-{
-	char			*content;
-	struct s_list	*next;
-}					t_list;
+# include "../libft.h"
 
 t_list			*find_last_node(t_list *dump);
 void			dealloc(t_list **dump, t_list *clean_node, char *buf);

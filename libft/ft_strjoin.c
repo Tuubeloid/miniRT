@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 12:16:14 by tvalimak          #+#    #+#             */
-/*   Updated: 2023/11/13 16:17:41 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/10 19:42:51 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	s1_len;
 	size_t	s2_len;
 	size_t	allocation_size;
-	size_t	i;
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
@@ -50,7 +49,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	allocation_size = s1_len + s2_len;
-	i = 0;
 	joined_str = (char *)malloc ((allocation_size + 1) * sizeof(char));
 	if (joined_str == NULL)
 		return (NULL);

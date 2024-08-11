@@ -3,42 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvalimak <Tvalimak@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 14:47:10 by tvalimak          #+#    #+#             */
-/*   Updated: 2023/12/15 18:31:20 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/10 20:07:25 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	len_to_char(t_list *dump, int flag)
+static int len_to_char(t_list *dump, int flag)
 {
-	int	i;
-	int	len;
+    int i;
+    int len;
+    char *content;
 
-	if (NULL == dump)
-		return (0);
-	len = 0;
-	while (dump)
-	{
-		i = 0;
-		while (dump->content[i])
-		{
-			if (dump->content[i] == '\n')
-			{
-				++i;
-				++len;
-				return (len);
-			}
-			++i;
-			++len;
-		}
-		dump = dump->next;
-	}
-	if (flag == 1)
-		return (len);
-	return (0);
+    if (dump == NULL)
+        return (0);
+    len = 0;
+    while (dump)
+    {
+        i = 0;
+        content = (char *)(dump->content);
+        while (content[i])
+        {
+            if (content[i] == '\n')
+            {
+                ++i;
+                ++len;
+                return (len);
+            }
+            ++i;
+            ++len;
+        }
+        dump = dump->next;
+    }
+    if (flag == 1)
+        return (len);
+    return (0);
 }
 
 static char	*get_new_line(t_list **dump, char *line)
@@ -62,27 +64,29 @@ char	*cpy_str(t_list *dump, char *next_line)
 {
 	int		src;
 	int		dst;
+	char	*content;
 
 	dst = 0;
 	while (dump)
 	{
 		src = 0;
-		while (dump->content[src])
+		content = (char *)(dump->content);
+		while (content[src])
 		{
-			if (dump->content[src] == '\n')
+			if (content[src] == '\n')
 			{
 				next_line[dst] = '\n';
 				dst++;
 				next_line[dst] = '\0';
 				return (next_line);
 			}
-			next_line[dst++] = dump->content[src++];
+			next_line[dst++] = content[src++];
 		}
-		free (dump->content);
+		free(dump->content);
 		dump->content = NULL;
 		dump = dump->next;
 	}
-	next_line[dst++] = '\0';
+	next_line[dst] = '\0';
 	return (next_line);
 }
 
