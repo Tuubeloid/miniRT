@@ -6,7 +6,7 @@
 #    By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 19:16:14 by tvalimak          #+#    #+#              #
-#    Updated: 2024/08/11 19:10:39 by tvalimak         ###   ########.fr        #
+#    Updated: 2024/08/12 19:21:44 by tvalimak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ GNLDIR	 	= $(LIBFTDIR)/GNL
 LIBFT 		= $(LIBFTDIR)/libft.a
 GNL 		= $(LIBFTDIR)/GNL/gnl.a
 
-SRCS = parse.c
+SRCS = 	parse.c \
+		validate_ambient.c \
+		parsing_utils.c 
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

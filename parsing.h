@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/11 20:29:59 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/12 19:50:55 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,19 @@
 
 # include "libft/libft.h"
 # include "libft/GNL/get_next_line.h"
+
+# include <fcntl.h>
+# include <stdio.h>
+
+typedef struct s_element_count
+{
+	int		ambient;
+	int		camera;
+	int		light;
+	int		sphere;
+	int		plane;
+	int		cylinder;
+}				t_element_count;
 
 typedef struct s_ambient
 {
@@ -100,5 +113,16 @@ typedef struct s_map
 	t_plane     **plane;
 	t_cylinder  **cylinder;
 }               t_map;
+
+/* ************************************************************************** */
+/*                                 parsing_utils.c                            */
+/* ************************************************************************** */
+
+int	validate_lines(char *line, t_element_count *element_count);
+int	check_element_count(t_element_count *element_count);
+int	validate_ambient(char *line, int i, t_element_count *element_count);
+int	free_split(char **split);
+int	pos_decimal_check(char *str, int i, int j);
+int	rgb_check(char *rgb, int min, int max);
 
 #endif
