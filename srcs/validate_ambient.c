@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:16:31 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/12 19:50:26 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/13 19:00:08 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	validate_ambient(char *line, int i, t_element_count *element_count)
 	char	**split;
 
 	split = ft_split(line, ' ');
+	printf("%s\n%s\n%s", split[0], split[1], split[2]);
 	if (split[0][0] != 'A' || split[0][1] != '\0')
 		return (free_split(split));
 	while (i < 3)

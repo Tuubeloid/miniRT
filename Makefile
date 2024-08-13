@@ -6,7 +6,7 @@
 #    By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 19:16:14 by tvalimak          #+#    #+#              #
-#    Updated: 2024/08/12 19:21:44 by tvalimak         ###   ########.fr        #
+#    Updated: 2024/08/13 18:01:03 by tvalimak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,12 +44,16 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJDIR) $(NAME)
-	@$(MAKE) clean -C $(LIBFTDIR) $(GNLDIR)
+	make fclean -C $(LIBFTDIR)
+	rm -rf $(OBJDIR)
+
+# @rm -rf $(OBJDIR) $(NAME)
+# @$(MAKE) clean -C $(LIBFTDIR) $(GNLDIR)
 
 fclean: clean
-	@rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIBFTDIR) $(GNLDIR)
+	rm -rf $(NAME)
+#	@rm -f $(NAME)
+#	@$(MAKE) fclean -C $(LIBFTDIR) $(GNLDIR)
 
 re: fclean all
 
