@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:16:31 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/13 19:00:08 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:09:58 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	validate_ambient(char *line, int i, t_element_count *element_count)
 	}
 	if (split[3] != NULL)
 		return (free_split(split));
-	if (pos_decimal_check(split[1], 0, 0) == 0)
+	if (pos_decimal_check(split[1]) == 0)
 		return (free_split(split));
 	if (rgb_check(split[2], 0, 255) == 0)
 		return (free_split(split));

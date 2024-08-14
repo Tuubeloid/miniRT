@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/14 18:02:43 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:42:23 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int	validate_lines(char *line, t_element_count *element_count)
 	else if (ft_strncmp(line, "A", 1) == 0)
 		return (validate_ambient(line, 1, element_count));
 	else if (ft_strncmp(line, "C", 1) == 0)
-		return (1);
+		return (validate_camera(line, 1, element_count));
 	else if (ft_strncmp(line, "L", 1) == 0)
 		return (1);
 	else if (ft_strncmp(line, "sp", 2) == 0)

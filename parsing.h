@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/14 17:51:16 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:50:19 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,22 @@ typedef struct s_map
 /*                                 parsing_utils.c                            */
 /* ************************************************************************** */
 
-int	validate_lines(char *line, t_element_count *element_count);
-int	check_element_count(t_element_count *element_count);
-int	validate_ambient(char *line, int i, t_element_count *element_count);
-int	free_split(char **split);
-int	pos_decimal_check(char *str);
-int	rgb_check(char *rgb, int min, int max);
+int		validate_lines(char *line, t_element_count *element_count);
+int		check_element_count(t_element_count *element_count);
+int		validate_ambient(char *line, int i, t_element_count *element_count);
+int 	validate_camera(char *line, int i, t_element_count *element_count);
+int		free_split(char **split);
+int		pos_decimal_check(char *str);
+int		rgb_check(char *rgb, int min, int max);
+double	ft_atof(const char *str);
+
+
+/* ************************************************************************** */
+/*                                 validate_camera.c                          */
+/* ************************************************************************** */
+
+int unsigned_decimal_check(char *str);
+int xyz_check(char *str);
+int	validate_camera(char *line, int i, t_element_count *element_count);
 
 #endif
