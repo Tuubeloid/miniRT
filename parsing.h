@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/12 19:50:55 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:51:16 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_element_count
 typedef struct s_ambient
 {
 	char    *id;
-	double  ratio;
+	float  ratio;
 	int     r;
 	int     g;
 	int     b;
@@ -41,22 +41,22 @@ typedef struct s_ambient
 typedef struct s_camera
 {
 	char    *id;
-	double  x;
-	double  y;
-	double  z;
-	double  nx;
-	double  ny;
-	double  nz;
-	double  fov;
+	float  x;
+	float  y;
+	float  z;
+	float  nx;
+	float  ny;
+	float  nz;
+	float  fov;
 }               t_camera;
 
 typedef struct s_light
 {
 	char    *id;
-	double  x;
-	double  y;
-	double  z;
-	double  ratio;
+	float  x;
+	float  y;
+	float  z;
+	float  ratio;
 	int     r;
 	int     g;
 	int     b;
@@ -65,10 +65,10 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	char    *id;
-	double  x;
-	double  y;
-	double  z;
-	double  diameter;
+	float  x;
+	float  y;
+	float  z;
+	float  diameter;
 	int     r;
 	int     g;
 	int     b;
@@ -77,12 +77,12 @@ typedef struct s_sphere
 typedef struct s_plane
 {
 	char    *id;
-	double  x;
-	double  y;
-	double  z;
-	double  nx;
-	double  ny;
-	double  nz;
+	float  x;
+	float  y;
+	float  z;
+	float  nx;
+	float  ny;
+	float  nz;
 	int     r;
 	int     g;
 	int     b;
@@ -91,14 +91,14 @@ typedef struct s_plane
 typedef struct s_cylinder
 {
 	char    *id;
-	double  x;
-	double  y;
-	double  z;
-	double  nx;
-	double  ny;
-	double  nz;
-	double  diameter;
-	double  height;
+	float  x;
+	float  y;
+	float  z;
+	float  nx;
+	float  ny;
+	float  nz;
+	float  diameter;
+	float  height;
 	int     r;
 	int     g;
 	int     b;
@@ -122,7 +122,7 @@ int	validate_lines(char *line, t_element_count *element_count);
 int	check_element_count(t_element_count *element_count);
 int	validate_ambient(char *line, int i, t_element_count *element_count);
 int	free_split(char **split);
-int	pos_decimal_check(char *str, int i, int j);
+int	pos_decimal_check(char *str);
 int	rgb_check(char *rgb, int min, int max);
 
 #endif

@@ -6,12 +6,35 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/13 19:45:52 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 18:02:43 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing.h"
 #include <ctype.h>
+
+double	ft_atof(const char *str)
+{
+	double	res;
+	double	res2;
+	char	*c;
+	int		len;
+
+	c = (char *)str;
+	res = (double)ft_atoi(c);
+	while (*c && *c != '.')
+		c++;
+	if (*c == '.')
+		c++;
+	res2 = (double)ft_atoi(c);
+	len = ft_strlen(c);
+	while (len--)
+		res2 /= 10;
+	if (res >= 0)
+		return (res + res2);
+	else
+		return (res + -res2);
+}
 
 int	free_split(char **split)
 {
@@ -26,58 +49,6 @@ int	free_split(char **split)
 	free(split);
 	return (0);
 }
-/*
-int	is_rgb_number(char **split)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	printf("%s\n%s\n%s\n%s\n", split[0] , split[1], split[2], split[3]);
-	while (i < 3)
-	{
-		while (split[i][j] != '\0')
-		{
-			//if (ft_isdigit(split[i][j]) == 0)
-			if (ft_isdigit(ft_atoi(split[i])) == 1)
-			{
-				printf("returning 0 from is rgb number\n");
-				return (0);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (1);
-}*/
-/*
-int	is_rgb_number(char **split)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	printf("%s\n%s\n%s\n", split[0] , split[1], split[2]);
-	while (i < 3)
-	{
-		while (split[i][j] != '\0' || split[i][j] != '\n')
-		{
-			if (ft_atoi(split[i][j]) < 0 || ft_atoi(split[i][j]) > 255)
-			{
-				printf("returning 0 from is rgb number\n");
-				return (0);
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	return (1);
-}*/
-
 
 int is_rgb_number(char **split)
 {
@@ -137,49 +108,41 @@ int	rgb_check(char *rgb, int min, int max)
 	printf("returned 1 from rgb check\n");
 	return (1);
 }
-// A double in C typically provides about 15 to 17 
-// significant decimal digits of precision. Figure out
-// how many decimals we need to check for the ratio.
 
-int	pos_decimal_check(char *str, int i, int j)
+int pos_decimal_check(char *str) 
 {
-	char	**split;
+    double value;
+    char *c = str;
 
-	printf("inside pos decimal check\n");
-	split = ft_split(str, '.');
-	if (split[0] == NULL || split[1] == NULL || split[2] != NULL)
-		return (free_split(split));
-	if (split[0][1] != '\0')
-		return (free_split(split));
-	while (i < 2)
+    while (*c)
 	{
-		printf("inside pos decimal check while loop\n");
-		while (split[i][j] != '\0')
+        if (ft_isdigit(*c) && *c != '.')
 		{
-			printf("inside pos decimal check while loop 2\n");
-			if (isdigit(split[i][j]) == 0)
-			{
-				printf("returning 0 from pos decimal check\n");
-				return (free_split(split));
-			}
-			j++;
-		}
-		j = 0;
-		i++;
-	}
-	if (ft_atoi(split[0]) < 0 || ft_atoi(split[0]) > 1)
+            printf("returning 0 from pos decimal check\n");
+            return 0;
+        }
+        c++;
+    }
+    value = ft_atof(str);
+    c = str;
+    if (*c == '-' || *c == '+')
 	{
 		printf("returning 0 from pos decimal check 1\n");
-		return (free_split(split));
-	}
-	if (ft_atoi(split[1]) < 0 || ft_atoi(split[1]) > 9)
+		return (0);
+    }
+    while (!ft_isdigit(*c))
+        c++;
+    if (*c == '.')
+        c++;
+    while (!ft_isdigit(*c))
+        c++;
+    if (*c != '\0' || value < 0.0 || value > 1.0)
 	{
-		printf("returning 0 from pos decimal check 2\n");
-		return (free_split(split));
-	}
-	free_split(split);
-	printf("returned 1 from pos decimal check\n");
-	return (1);
+        printf("returning 0 from pos decimal check\n");
+        return 0;
+    }
+    printf("returned 1 from pos decimal check\n");
+    return 1;
 }
 
 int	check_element_count(t_element_count *element_count)

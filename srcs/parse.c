@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/12 19:32:37 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:58:36 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int main(void)
 	t_element_count		element_count;
 
 	ft_memset(&element_count, 0, sizeof(t_element_count));
-    fd = open("/home/tvalimak/miniRTparsing/srcs/test.rt", O_RDONLY);
+    // fd = open("/home/tvalimak/miniRTparsing/srcs/test.rt", O_RDONLY);
+    fd = open("/home/tvalimak/Hive/miniRTParse/srcs/test.rt", O_RDONLY);
     if (fd == -1)
     {
         printf("Error\n");
