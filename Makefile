@@ -6,7 +6,7 @@
 #    By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 19:16:14 by tvalimak          #+#    #+#              #
-#    Updated: 2024/08/14 18:48:38 by tvalimak         ###   ########.fr        #
+#    Updated: 2024/08/15 10:51:21 by tvalimak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ GNL 		= $(LIBFTDIR)/GNL/gnl.a
 SRCS = 	parse.c \
 		validate_ambient.c \
 		validate_camera.c \
-		parsing_utils.c
+		parsing_utils.c \
+		validate_light.c
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
