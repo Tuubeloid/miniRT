@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/15 11:47:11 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/15 15:43:16 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,7 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef struct s_element_count
-{
-	int		ambient;
-	int		camera;
-	int		light;
-	int		sphere;
-	int		plane;
-	int		cylinder;
-}				t_element_count;
+typedef struct s_map t_map;
 
 typedef struct s_ambient
 {
@@ -36,6 +28,7 @@ typedef struct s_ambient
 	int     r;
 	int     g;
 	int     b;
+	t_map	*map;
 }               t_ambient;
 
 typedef struct s_camera
@@ -48,6 +41,7 @@ typedef struct s_camera
 	float  ny;
 	float  nz;
 	float  fov;
+	t_map	*map;
 }               t_camera;
 
 typedef struct s_light
@@ -60,11 +54,12 @@ typedef struct s_light
 	int     r;
 	int     g;
 	int     b;
+	t_map	*map;
 }               t_light;
 
 typedef struct s_sphere
 {
-	char    *id;
+	int    id;
 	float  x;
 	float  y;
 	float  z;
@@ -72,6 +67,7 @@ typedef struct s_sphere
 	int     r;
 	int     g;
 	int     b;
+	t_map	*map;
 }               t_sphere;
 
 typedef struct s_plane
@@ -86,6 +82,7 @@ typedef struct s_plane
 	int     r;
 	int     g;
 	int     b;
+	t_map	*map;
 }               t_plane;
 
 typedef struct s_cylinder
@@ -102,16 +99,28 @@ typedef struct s_cylinder
 	int     r;
 	int     g;
 	int     b;
+	t_map	*map;
 }               t_cylinder;
+
+typedef struct s_element_count
+{
+	int		ambient;
+	int		camera;
+	int		light;
+	int		sphere;
+	int		plane;
+	int		cylinder;
+}				t_element_count;
 
 typedef struct s_map
 {
-	t_ambient   *ambient;
-	t_camera    **camera;
-	t_light     **light;
-	t_sphere    **sphere;
-	t_plane     **plane;
-	t_cylinder  **cylinder;
+	t_ambient   	*ambient;
+	t_camera    	**camera;
+	t_light     	**light;
+	t_sphere    	**sphere;
+	t_plane     	**plane;
+	t_cylinder  	**cylinder;
+	t_element_count *element_count;
 }               t_map;
 
 /* ************************************************************************** */
@@ -119,12 +128,14 @@ typedef struct s_map
 /* ************************************************************************** */
 
 int		validate_lines(char *line, t_element_count *element_count);
-int		check_element_count(t_element_count *element_count);
+int		check_element_count(t_element_count *element_count, int flag);
 int		validate_ambient(char *line, int i, t_element_count *element_count);
+int 	validate_light(char *line, int i, t_element_count *element_count);
 int		free_split(char **split);
 int		pos_decimal_check(char *str);
 int		rgb_check(char *rgb, int min, int max);
 double	ft_atof(const char *str);
+int 	vectors_check(char *str);
 
 
 /* ************************************************************************** */
@@ -136,9 +147,11 @@ int decimal_check(char *str, int min, int max);
 int	validate_camera(char *line, int i, t_element_count *element_count);
 
 /* ************************************************************************** */
-/*                                 validate_light.c                           */
+/*                                 validation of shapes                       */
 /* ************************************************************************** */
 
-int validate_light(char *line, int i, t_element_count *element_count);
+int validate_sphere(char *line, t_element_count *element_count);
+int validate_plane(char *line, t_element_count *element_count);
+int validate_cylinder(char *line, t_element_count *element_count);
 
 #endif

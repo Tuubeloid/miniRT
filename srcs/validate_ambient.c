@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:16:31 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/14 18:09:58 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/15 12:58:47 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	validate_ambient(char *line, int i, t_element_count *element_count)
 		return (free_split(split));
 	free_split(split);
 	element_count->ambient++;
+	printf("Returning 1 from validate_ambient\n");
 	return (1);
 }
