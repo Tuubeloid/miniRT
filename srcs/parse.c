@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:50:12 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/15 16:04:27 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,22 @@ int terminate_data(t_map *map, char *error)
 
 int setup_structs(t_element_count *element_count, t_map *map)
 {
-    map->ambient = ft_calloc(element_count->ambient, sizeof(t_ambient));
+    map->ambient = ft_calloc(element_count->ambient, sizeof(t_ambient *));
     if (!map->ambient)
         return (terminate_data(map, "Error in malloc (ambient)\n"));
-    map->camera = ft_calloc(element_count->camera, sizeof(t_camera));
+    map->camera = ft_calloc(element_count->camera, sizeof(t_camera *));
     if (!map->camera)
         return (terminate_data(map, "Error in malloc (camera)\n"));
-    map->light = ft_calloc(element_count->light, sizeof(t_light));
+    map->light = ft_calloc(element_count->light, sizeof(t_light *));
     if (!map->light)
         return (terminate_data(map, "Error in malloc (light)\n"));
-    map->sphere = ft_calloc(element_count->sphere, sizeof(t_sphere));
+    map->sphere = ft_calloc(element_count->sphere, sizeof(t_sphere *));
     if (!map->sphere)
         return (terminate_data(map, "Error in malloc (sphere)\n"));
-    map->plane = ft_calloc(element_count->plane, sizeof(t_plane));
+    map->plane = ft_calloc(element_count->plane, sizeof(t_plane *));
     if (!map->plane)
         return (terminate_data(map, "Error in malloc (plane)\n"));
-    map->cylinder = ft_calloc(element_count->cylinder, sizeof(t_cylinder));
+    map->cylinder = ft_calloc(element_count->cylinder, sizeof(t_cylinder *));
     if (!map->cylinder)
         return (terminate_data(map, "Error in malloc (cylinder)\n"));
     return (1);
@@ -96,18 +96,7 @@ int setup_structs(t_element_count *element_count, t_map *map)
 int setup_vars(t_map *map)
 {
     (void)map;
-    /*
-    int i ;
-    t_sphere **sphere;
-
-    i = 0;
-    sphere = map->sphere;
-    while (i < map->element_count->sphere)
-    {
-        printf("%d\n", sphere[i]->id);
-        i++;
-    }*/
-    return (1);
+    return 1;
 }
 
 int setup_data(t_element_count *element_count)
