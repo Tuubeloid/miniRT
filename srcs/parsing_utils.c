@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/15 15:04:20 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:40:35 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,14 +172,15 @@ int	check_element_count(t_element_count *element_count, int flag)
 	return (1);
 }
 
-int	validate_lines(char *line, t_element_count *element_count)
+int	validate_lines(char *line, t_element_count *element_count, \
+	t_raw_data *raw_data)
 {
 	if (check_element_count(element_count, 0) == 0)
 		return (0);
 	else if (ft_strncmp(line, "\n", 1) == 0)
 		return (1);
 	else if (ft_strncmp(line, "A", 1) == 0)
-		return (validate_ambient(line, 1, element_count));
+		return (validate_ambient(line, 1, element_count, raw_data));
 	else if (ft_strncmp(line, "C", 1) == 0)
 		return (validate_camera(line, 1, element_count));
 	else if (ft_strncmp(line, "L", 1) == 0)

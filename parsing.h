@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/16 17:16:02 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/16 22:42:59 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,12 @@ typedef struct s_cylinder
 	t_map				*map;
 }				t_cylinder;
 
+typedef struct s_raw_data
+{
+	char				**line;
+	struct s_raw_data	*next;
+}					t_raw_data;
+
 typedef struct s_element_count
 {
 	int		ambient;
@@ -121,11 +127,11 @@ typedef struct s_element_count
 typedef struct s_map
 {
 	t_ambient		*ambient;
-	t_camera		**camera;
-	t_light			**light;
-	t_sphere		**sphere;
-	t_plane			**plane;
-	t_cylinder		**cylinder;
+	t_camera		*camera;
+	t_light			*light;
+	t_sphere		*sphere;
+	t_plane			*plane;
+	t_cylinder		*cylinder;
 	t_element_count	*element_count;
 }				t_map;
 
