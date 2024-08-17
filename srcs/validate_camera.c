@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:05:28 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/15 10:47:31 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:03:04 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int vectors_check(char *str)
     return (1);
 }
 
-int	validate_camera(char *line, int i, t_element_count *element_count)
+int	validate_camera(char *line, int i, t_element_count *element_count, \
+	t_raw_data  *raw_data)
 {
     char	**split;
 
@@ -158,6 +159,8 @@ int	validate_camera(char *line, int i, t_element_count *element_count)
         printf("returning 0 from camera check 5\n");
         return (free_split(split));
     }
+	if (setup_raw_data(line, raw_data) == 0)
+		return (free_split(split));
     free_split(split);
     element_count->camera++;
     printf("returned 1 from camera check\n");

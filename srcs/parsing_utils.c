@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/16 22:40:35 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:09:29 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,15 +182,15 @@ int	validate_lines(char *line, t_element_count *element_count, \
 	else if (ft_strncmp(line, "A", 1) == 0)
 		return (validate_ambient(line, 1, element_count, raw_data));
 	else if (ft_strncmp(line, "C", 1) == 0)
-		return (validate_camera(line, 1, element_count));
+		return (validate_camera(line, 1, element_count, raw_data));
 	else if (ft_strncmp(line, "L", 1) == 0)
-		return (validate_light(line, 1, element_count));
+		return (validate_light(line, 1, element_count, raw_data));
 	else if (ft_strncmp(line, "sp", 2) == 0)
-		return (validate_sphere(line, element_count));
+		return (validate_sphere(line, element_count, raw_data));
 	else if (ft_strncmp(line, "pl", 2) == 0)
-		return (validate_plane(line, element_count));
+		return (validate_plane(line, element_count, raw_data));
 	else if (ft_strncmp(line, "cy", 2) == 0)
-		return (validate_cylinder(line, element_count));
+		return (validate_cylinder(line, element_count, raw_data));
 	else
 		return (0);
 	if (check_element_count(element_count, 1) == 0)

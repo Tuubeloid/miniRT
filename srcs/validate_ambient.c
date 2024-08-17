@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:16:31 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/16 22:45:46 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:26:20 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,22 @@
 
 int	setup_raw_data(char *line, t_raw_data *raw_data)
 {
-	while (raw_data->next)
+	if (raw_data->line == NULL)
+	{
+		raw_data->line = ft_strdup(line);
+		if (raw_data->line == NULL)
+			return (0);
+		return (1);
+	}
+	while (raw_data->next != NULL)
 		raw_data = raw_data->next;
+	raw_data->next = malloc(sizeof(t_raw_data));
+	if (raw_data->next == NULL)
+		return (0);
+	raw_data->next->line = ft_strdup(line);
+	if (raw_data->next->line == NULL)
+		return (0);
+	raw_data->next->next = NULL;
 	return (1);
 }
 
@@ -40,7 +54,7 @@ int	validate_ambient(char *line, int i, t_element_count *element_count, \
 		return (free_split(split));
 	if (rgb_check(split[2], 0, 255) == 0)
 		return (free_split(split));
-	if (setup_raw_data(split, raw_data) == 0)
+	if (setup_raw_data(line, raw_data) == 0)
 		return (free_split(split));
 	free_split(split);
 	element_count->ambient++;

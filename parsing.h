@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/16 22:42:59 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:36:53 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_cylinder
 
 typedef struct s_raw_data
 {
-	char				**line;
+	char				*line;
 	struct s_raw_data	*next;
 }					t_raw_data;
 
@@ -133,37 +133,46 @@ typedef struct s_map
 	t_plane			*plane;
 	t_cylinder		*cylinder;
 	t_element_count	*element_count;
+	t_raw_data		*raw_data;
 }				t_map;
 
 /* ************************************************************************** */
 /*                                 parsing_utils.c                            */
 /* ************************************************************************** */
 
-int		validate_lines(char *line, t_element_count *element_count);
+int		validate_lines(char *line, t_element_count *element_count, \
+		t_raw_data *raw_data);
 int		check_element_count(t_element_count *element_count, int flag);
-int		validate_ambient(char *line, int i, t_element_count *element_count);
-int 	validate_light(char *line, int i, t_element_count *element_count);
+int		validate_ambient(char *line, int i, t_element_count *element_count, \
+		t_raw_data *raw_data);
+int		validate_light(char *line, int i, t_element_count *element_count, \
+		t_raw_data *raw_data);
 int		free_split(char **split);
 int		pos_decimal_check(char *str);
 int		rgb_check(char *rgb, int min, int max);
 double	ft_atof(const char *str);
-int 	vectors_check(char *str);
+int		vectors_check(char *str);
+int		setup_raw_data(char *line, t_raw_data *raw_data);
 
 
 /* ************************************************************************** */
 /*                                 validate_camera.c                          */
 /* ************************************************************************** */
 
-int xyz_check(char *str);
-int decimal_check(char *str, int min, int max);
-int	validate_camera(char *line, int i, t_element_count *element_count);
+int		xyz_check(char *str);
+int		decimal_check(char *str, int min, int max);
+int		validate_camera(char *line, int i, t_element_count *element_count, \
+	t_raw_data	*raw_data);
 
 /* ************************************************************************** */
 /*                                 validation of shapes                       */
 /* ************************************************************************** */
 
-int validate_sphere(char *line, t_element_count *element_count);
-int validate_plane(char *line, t_element_count *element_count);
-int validate_cylinder(char *line, t_element_count *element_count);
+int		validate_sphere(char *line, t_element_count *element_count, \
+	t_raw_data	*raw_data);
+int		validate_plane(char *line, t_element_count *element_count, \
+	t_raw_data *raw_data);
+int		validate_cylinder(char *line, t_element_count *element_count, \
+	t_raw_data	*raw_data);
 
 #endif

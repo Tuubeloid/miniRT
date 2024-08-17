@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/16 22:49:44 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:38:02 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@
 // index 1 is ratio which should be in range of 0,0 and 1,0
 // index 2 is RGB colors which should be in range [0-255]: 255, 255, 255
 
-int	read_to_setup(t_element_count *element_count, t_map map)
-{
-
-}
-
 int read_to_parse(t_element_count *element_count, t_raw_data *raw_data)
 {
 	int		fd;
 	char	*line;
 
-	fd = open("/home/tvalimak/Hive/miniRTParse/srcs/test.rt", O_RDONLY);
-	// fd = open("/home/tvalimak/miniRTparsing/srcs/test.rt", O_RDONLY);
+	//fd = open("/home/tvalimak/Hive/miniRTParse/srcs/test.rt", O_RDONLY);
+	fd = open("/home/tvalimak/miniRTparsing/srcs/test.rt", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("Error in fd\n");
@@ -75,40 +70,29 @@ int terminate_data(t_map *map, char *error)
     return (0);
 }
 
-int setup_ambient(char *line, t_map *map, t_element_count *element_count)
+int print_raw_data(t_raw_data *raw_data)
 {
-    char **split;
-
-	split = 
+    printf("Printing raw data\n");
+    while (raw_data)
+    {
+        printf("%s\n", raw_data->line);
+        raw_data = raw_data->next;
+    }
+    printf("End of raw data\n");
+    return (1);
 }
 
-int	setup_vars(char *line, t_element_count *element_count, t_map *map)
+int	terminate_raw_data(t_raw_data *raw_data)
 {
-	if (check_element_count(element_count, 0) == 0)
-		return (0);
-	else if (ft_strncmp(line, "\n", 1) == 0)
-		return (1);
-	else if (ft_strncmp(line, "A", 1) == 0)
-        return (setup_ambient(line, map, element_count));
-	else if (ft_strncmp(line, "C", 1) == 0)
-        return (1);
-        // function to validate camera
-	else if (ft_strncmp(line, "L", 1) == 0)
-        return (1);
-        // function to validate light
-	else if (ft_strncmp(line, "sp", 2) == 0)
-        return (1);
-        // function to validate sphere
-	else if (ft_strncmp(line, "pl", 2) == 0)
-        return (1);
-        // function to validate plane
-	else if (ft_strncmp(line, "cy", 2) == 0)
-        return (1);
-        // function to validate cylinder
-	else
-		return (0);
-	if (check_element_count(element_count, 1) == 0)
-		return (0);
+	t_raw_data	*temp;
+
+	while (raw_data)
+	{
+		temp = raw_data->next;
+		free(raw_data->line);
+		free(raw_data);
+		raw_data = temp;
+	}
 	return (1);
 }
 
@@ -135,34 +119,56 @@ int setup_structs(t_element_count *element_count, t_map *map)
     return (1);
 }
 
-int setup_data(t_element_count *element_count)
+int	setup_data(t_element_count *element_count, t_raw_data *raw_data, t_map *map)
 {
-    t_map       *map;
-
-    map = ft_calloc(1, sizeof(t_map));
-    if (!map)
-        return (terminate_data(map, "Error in malloc (map)\n"));
-    if (setup_structs(element_count, map) == 0)
-        return (0);
-    if (setup_vars(map, element_count) == 0)
-        return (terminate_data(map, "Error in setup_vars\n"));
-    printf("Data setup was successful\n");
-    return (1);
+	(void)raw_data;
+	if (check_element_count(element_count, 1) == 0)
+	{
+		printf("Error in element count\n");
+		return (0);
+	}
+	map = malloc(sizeof(t_map));
+	if (!map)
+	{
+		printf("Error in malloc (map)\n");
+		return (0);
+	}
+	if (setup_structs(element_count, map) == 0)
+		return (0);
+	return (1);
 }
 
 int main(void)
 {
 	t_element_count		element_count;
-	t_raw_data			raw_data;
+	t_raw_data			*raw_data;
+	t_map				*map;
 
 	ft_memset(&element_count, 0, sizeof(t_element_count));
 	raw_data = malloc(sizeof(t_raw_data));
-    if (read_to_parse(&element_count, &raw_data) == 0)
+    if (!raw_data)
+    {
+        printf("Error in malloc (raw_data)\n");
         return (0);
-    if (setup_data(&element_count) == 0)
+    }
+	map = malloc(sizeof(t_map));
+	if (!map)
+	{
+		printf("Error in malloc (map)\n");
+		return (0);
+	}
+    raw_data->line = NULL;
+    raw_data->next = NULL;
+    if (read_to_parse(&element_count, raw_data) == 0)
+        return (0);
+    if (print_raw_data(raw_data) == 0)
+        return (0);
+    if (setup_data(&element_count, raw_data, map) == 0)
     {
         printf("Error in setup_data\n");
         return (0);
     }
+    if (terminate_raw_data(raw_data) == 0)
+        return (0);
     return (0);
 }
