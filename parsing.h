@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 22:36:53 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:41:18 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,23 @@ typedef struct s_map	t_map;
 
 typedef struct s_ambient
 {
-	char				*id;
 	float				ratio;
 	int					r;
 	int					g;
 	int					b;
-	struct s_ambient	*next;
 	t_map				*map;
 }				t_ambient;
 
 typedef struct s_camera
 {
-	char			*id;
+	char			**split;
 	float			x;
 	float			y;
 	float			z;
 	float			nx;
 	float			ny;
 	float			nz;
-	float			fov;
+	int				fov;
 	struct s_camera	*next;
 	t_map			*map;
 }				t_camera;

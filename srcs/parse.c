@@ -6,18 +6,11 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 22:38:02 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:41:34 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parsing.h"
-
-/*	First create reading and validation of element data, if file is valid we create linked list
-	nodes for all individual elements and that data will be accessible from a main struct which
-	holds pointers to all elements and element lists. */
-
-// index 1 is ratio which should be in range of 0,0 and 1,0
-// index 2 is RGB colors which should be in range [0-255]: 255, 255, 255
 
 int read_to_parse(t_element_count *element_count, t_raw_data *raw_data)
 {
@@ -96,45 +89,112 @@ int	terminate_raw_data(t_raw_data *raw_data)
 	return (1);
 }
 
-int setup_structs(t_element_count *element_count, t_map *map)
+int	setup_map(t_map *map)
 {
-    map->ambient = ft_calloc(element_count->ambient, sizeof(t_ambient *));
-    if (!map->ambient)
-        return (terminate_data(map, "Error in malloc (ambient)\n"));
-    map->camera = ft_calloc(element_count->camera, sizeof(t_camera *));
-    if (!map->camera)
-        return (terminate_data(map, "Error in malloc (camera)\n"));
-    map->light = ft_calloc(element_count->light, sizeof(t_light *));
-    if (!map->light)
-        return (terminate_data(map, "Error in malloc (light)\n"));
-    map->sphere = ft_calloc(element_count->sphere, sizeof(t_sphere *));
-    if (!map->sphere)
-        return (terminate_data(map, "Error in malloc (sphere)\n"));
-    map->plane = ft_calloc(element_count->plane, sizeof(t_plane *));
-    if (!map->plane)
-        return (terminate_data(map, "Error in malloc (plane)\n"));
-    map->cylinder = ft_calloc(element_count->cylinder, sizeof(t_cylinder *));
-    if (!map->cylinder)
-        return (terminate_data(map, "Error in malloc (cylinder)\n"));
-    return (1);
+	(void)map;
+	printf("inside setup_map\n");
+	/*ft_memset(map->ambient, 0, sizeof(t_ambient));
+	ft_memset(map->camera, 0, sizeof(t_camera));
+	ft_memset(map->light, 0, sizeof(t_light));
+	ft_memset(map->sphere, 0, sizeof(t_sphere));
+	ft_memset(map->plane, 0, sizeof(t_plane));
+	ft_memset(map->cylinder, 0, sizeof(t_cylinder));*/
+	printf("end of setup_map\n");
+	return (1);
+}
+
+int	setup_ambient(t_map *map, char *line)
+{
+	char	**split;
+	char	**rgb;
+
+	printf("inside setup_ambient\n");
+	map->ambient = malloc(sizeof(t_ambient));
+	if (map->ambient == NULL)
+		return (0);
+	split = ft_split(line, ' ');
+	if (split == NULL)
+		return (0);
+	rgb = ft_split(split[2], ',');
+	if (rgb == NULL)
+	{
+		free(split);
+		return (0);
+	}
+	map->ambient->ratio = ft_atof(split[1]);
+	map->ambient->r = ft_atoi(rgb[0]);
+	map->ambient->g = ft_atoi(rgb[1]);
+	map->ambient->b = ft_atoi(rgb[2]);
+	free(rgb);
+	free(split);
+	printf("%f\n%d\n%d\n%d\n", map->ambient->ratio, map->ambient->r, map->ambient->g, map->ambient->b);
+	printf("end of setup_ambient\n");
+	return (1);
+}
+
+int	setup_camera(t_map *map, char *line)
+{
+	t_camera	*new_camera;
+	char		**split;
+
+	new_camera = malloc(sizeof(t_camera));
+	if (new_camera == NULL)
+		return (0);
+	if (map->camera == NULL)
+		map->camera = new_camera;
+	else
+	{
+		while (map->camera->next != NULL)
+			map->camera = map->camera->next;
+		map->camera->next = new_camera;
+		map->camera = new_camera;
+	}
+	split = ft_split(line, ' ');
+	map->camera->split = split;
+	map->camera->x = ft_atof(split[1]);
+	map->camera->y = ft_atof(split[2]);
+	map->camera->z = ft_atof(split[3]);
+	map->camera->nx = ft_atof(split[4]);
+	map->camera->ny = ft_atof(split[5]);
+	map->camera->nz = ft_atof(split[6]);
+	map->camera->fov = ft_atoi(split[7]);
+	map->camera->next = NULL;
+	return (1);
+}
+
+int	setup_lists(t_map *map)
+{
+	printf("inside setup_lists\n");
+	while (map->raw_data)
+	{
+		printf("inside while loop in setup_lists\n");
+		printf("%s\n", map->raw_data->line);
+		if (ft_strncmp(map->raw_data->line, "A", 1) == 0)
+			return (setup_ambient(map, map->raw_data->line));
+		else if (ft_strncmp(map->raw_data->line, "C", 1) == 0)
+			return (setup_camera(map, map->raw_data->line));
+		printf("end of while loop in setup_lists\n");
+		map->raw_data = map->raw_data->next;
+	}
+	printf("end of setup_lists\n");
+	return (1);
 }
 
 int	setup_data(t_element_count *element_count, t_raw_data *raw_data, t_map *map)
 {
-	(void)raw_data;
-	if (check_element_count(element_count, 1) == 0)
-	{
-		printf("Error in element count\n");
+	printf("inside setup_data\n");
+	if (setup_map(map) == 0)
 		return (0);
-	}
-	map = malloc(sizeof(t_map));
-	if (!map)
-	{
-		printf("Error in malloc (map)\n");
+	map->element_count = element_count;
+	map->raw_data = raw_data;
+	/*map->camera->next = NULL;
+	map->light->next = NULL;
+	map->sphere->next = NULL;
+	map->plane->next = NULL;
+	map->cylinder->next = NULL;*/
+	if (setup_lists(map) == 0)
 		return (0);
-	}
-	if (setup_structs(element_count, map) == 0)
-		return (0);
+	printf("end of setup_data\n");
 	return (1);
 }
 
@@ -151,18 +211,17 @@ int main(void)
         printf("Error in malloc (raw_data)\n");
         return (0);
     }
+    raw_data->line = NULL;
+    raw_data->next = NULL;
+    if (read_to_parse(&element_count, raw_data) == 0)
+        return (0);
+    print_raw_data(raw_data);
 	map = malloc(sizeof(t_map));
 	if (!map)
 	{
 		printf("Error in malloc (map)\n");
 		return (0);
 	}
-    raw_data->line = NULL;
-    raw_data->next = NULL;
-    if (read_to_parse(&element_count, raw_data) == 0)
-        return (0);
-    if (print_raw_data(raw_data) == 0)
-        return (0);
     if (setup_data(&element_count, raw_data, map) == 0)
     {
         printf("Error in setup_data\n");
