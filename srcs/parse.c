@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 18:26:47 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 23:41:34 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/17 23:46:16 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,20 +86,6 @@ int	terminate_raw_data(t_raw_data *raw_data)
 		free(raw_data);
 		raw_data = temp;
 	}
-	return (1);
-}
-
-int	setup_map(t_map *map)
-{
-	(void)map;
-	printf("inside setup_map\n");
-	/*ft_memset(map->ambient, 0, sizeof(t_ambient));
-	ft_memset(map->camera, 0, sizeof(t_camera));
-	ft_memset(map->light, 0, sizeof(t_light));
-	ft_memset(map->sphere, 0, sizeof(t_sphere));
-	ft_memset(map->plane, 0, sizeof(t_plane));
-	ft_memset(map->cylinder, 0, sizeof(t_cylinder));*/
-	printf("end of setup_map\n");
 	return (1);
 }
 
@@ -183,15 +169,8 @@ int	setup_lists(t_map *map)
 int	setup_data(t_element_count *element_count, t_raw_data *raw_data, t_map *map)
 {
 	printf("inside setup_data\n");
-	if (setup_map(map) == 0)
-		return (0);
 	map->element_count = element_count;
 	map->raw_data = raw_data;
-	/*map->camera->next = NULL;
-	map->light->next = NULL;
-	map->sphere->next = NULL;
-	map->plane->next = NULL;
-	map->cylinder->next = NULL;*/
 	if (setup_lists(map) == 0)
 		return (0);
 	printf("end of setup_data\n");
