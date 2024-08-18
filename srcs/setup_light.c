@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 21:26:31 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/18 21:26:54 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:41:53 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	setup_light(char **split, t_map *map)
 	map->light = setup_light_helper(map);
 	if (map->light == NULL)
 		return (0);
-	map->light->id = ft_strdup(split[1]);
 	map->light->x = ft_atof(split[2]);
 	map->light->y = ft_atof(split[3]);
 	map->light->z = ft_atof(split[4]);
