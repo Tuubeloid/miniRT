@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:05:28 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 23:20:58 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:17:17 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int vectors_check(char *str)
     return (1);
 }
 
-int	validate_camera(char *line, int i, t_element_count *element_count, \
-	t_raw_data  *raw_data)
+int	validate_camera(char *line, t_element_count *element_count, \
+    t_map *map)
 {
     char	**split;
 
@@ -127,19 +127,10 @@ int	validate_camera(char *line, int i, t_element_count *element_count, \
         printf("returning 0 from validate_camera 0\n");
 		return (free_split(split));
     }
-    while (i < 4)
-	{
-		if (split[i] == NULL)
-        {
-            printf("returning 0 from validate_camera 1\n");
-			return (free_split(split));
-        }
-		i++;
-	}
-	if (split[4] != NULL)
+    if (split[1] == NULL || split[2] == NULL || split[3] == NULL || split[4] != NULL)
     {
-        printf("returning 0 from validate_camera 2\n");
-		return (free_split(split));
+        printf("returning 0 from validate_camera 0.5\n");
+        return (free_split(split));
     }
     // add unsigned decimal check
     if (xyz_check(split[1]) == 0)
@@ -159,8 +150,11 @@ int	validate_camera(char *line, int i, t_element_count *element_count, \
         printf("returning 0 from camera check 5\n");
         return (free_split(split));
     }
-	if (setup_raw_data(line, raw_data) == 0)
-		return (free_split(split));
+    if (setup_camera(split, map) == 0)
+    {
+        printf("returning 0 from camera check 6\n");
+        return (free_split(split));
+    }
     free_split(split);
     element_count->camera++;
     printf("returned 1 from camera check\n");

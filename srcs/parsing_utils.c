@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 22:09:29 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:18:48 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,25 +172,24 @@ int	check_element_count(t_element_count *element_count, int flag)
 	return (1);
 }
 
-int	validate_lines(char *line, t_element_count *element_count, \
-	t_raw_data *raw_data)
+int	validate_lines(char *line, t_element_count *element_count, t_map *map)
 {
 	if (check_element_count(element_count, 0) == 0)
 		return (0);
 	else if (ft_strncmp(line, "\n", 1) == 0)
 		return (1);
 	else if (ft_strncmp(line, "A", 1) == 0)
-		return (validate_ambient(line, 1, element_count, raw_data));
+		return (validate_ambient(line, element_count, map));
 	else if (ft_strncmp(line, "C", 1) == 0)
-		return (validate_camera(line, 1, element_count, raw_data));
+		return (validate_camera(line, element_count, map));
 	else if (ft_strncmp(line, "L", 1) == 0)
-		return (validate_light(line, 1, element_count, raw_data));
+		return (validate_light(line, element_count, map));
 	else if (ft_strncmp(line, "sp", 2) == 0)
-		return (validate_sphere(line, element_count, raw_data));
+		return (validate_sphere(line, element_count, map));
 	else if (ft_strncmp(line, "pl", 2) == 0)
-		return (validate_plane(line, element_count, raw_data));
+		return (validate_plane(line, element_count, map));
 	else if (ft_strncmp(line, "cy", 2) == 0)
-		return (validate_cylinder(line, element_count, raw_data));
+		return (validate_cylinder(line, element_count, map));
 	else
 		return (0);
 	if (check_element_count(element_count, 1) == 0)

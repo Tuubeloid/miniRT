@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 10:51:00 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 22:04:13 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:25:48 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@
 // L -40.0,,50.0,0.0 0.6 10,0,255 should give invalid but now
 // it doesn't
 
-int validate_light(char *line, int i, t_element_count *element_count, \
-    t_raw_data *raw_data)
+int validate_light(char *line, t_element_count *element_count, t_map *map)
 {
     char **split;
 
-    (void)i;
     (void)element_count;
     printf("inside validate light\n");
     split = ft_split(line, ' ');
-    if (!split[1] || !split[2] || !split[3] || split[4])
+	if (split[0] == NULL || split[1] == NULL || split[2] == NULL || \
+	split[3] == NULL || split[4] != NULL)
     {
         printf("returning 0 from validate light 1\n");
         return (free_split(split));
@@ -55,8 +54,9 @@ int validate_light(char *line, int i, t_element_count *element_count, \
         printf("returning 0 from validate_light 4\n");
         return (free_split(split));
     }
-	if (setup_raw_data(line, raw_data) == 0)
-		return (free_split(split));
+	if (setup_light(split, map) == 0)
+        return (free_split(split));
+    free_split(split);
     printf("returned 1 from light check\n");
     element_count->light++;
     return (1);
