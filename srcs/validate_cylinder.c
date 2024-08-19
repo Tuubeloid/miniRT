@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 13:14:50 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/17 22:09:22 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/19 10:32:41 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 ∗ R,G,B colors in range [0,255]: 10, 0, 255, rgb check*/
 
 int validate_cylinder(char *line, t_element_count *element_count, \
-    t_raw_data *raw_data)
+    t_map *map)
 {
     char **split;
 
@@ -63,8 +63,9 @@ int validate_cylinder(char *line, t_element_count *element_count, \
         printf("returning 0 from validate_cylinder 6\n");
         return (free_split(split));
     }
-	if (setup_raw_data(line, raw_data) == 0)
-		return (free_split(split));
+    if (setup_cylinder(split, map) == 0)
+        return (free_split(split));
+    free_split(split);
     printf("returned 1 from validate_cylinder\n");
     element_count->cylinder++;
     return (1);

@@ -6,7 +6,7 @@
 #    By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/10 19:16:14 by tvalimak          #+#    #+#              #
-#    Updated: 2024/08/18 21:28:06 by tvalimak         ###   ########.fr        #
+#    Updated: 2024/08/19 10:46:04 by tvalimak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,10 @@ SRCS = 	parse.c \
 		validate_cylinder.c \
 		setup_ambient.c \
 		setup_camera.c \
-		setup_light.c
+		setup_light.c \
+		setup_cylinder.c \
+		setup_plane.c \
+		setup_sphere.c
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 

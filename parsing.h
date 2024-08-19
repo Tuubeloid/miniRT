@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 19:39:44 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/18 21:41:53 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:29:05 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_light
 
 typedef struct s_sphere
 {
-	int				id;
 	float			x;
 	float			y;
 	float			z;
@@ -72,7 +71,6 @@ typedef struct s_sphere
 
 typedef struct s_plane
 {
-	char			*id;
 	float			x;
 	float			y;
 	float			z;
@@ -88,7 +86,6 @@ typedef struct s_plane
 
 typedef struct s_cylinder
 {
-	char				*id;
 	float				x;
 	float				y;
 	float				z;
@@ -171,5 +168,8 @@ int		validate_light(char *line, t_element_count *element_count, t_map *map);
 int		setup_ambient(char **split, t_map *map);
 int		setup_camera(char **split, t_map *map);
 int		setup_light(char **split, t_map *map);
+int		setup_sphere(char **split, t_map *map);
+int		setup_plane(char **split, t_map *map);
+int		setup_cylinder(char **split, t_map *map);
 
 #endif

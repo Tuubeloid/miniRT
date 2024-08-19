@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 19:18:40 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/18 21:18:48 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:50:34 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,24 @@ double	ft_atof(const char *str)
 
 int	free_split(char **split)
 {
+	printf("inside free_split 0\n");
 	int	i;
 
+	if (split == NULL)
+		return (0);
+
 	i = 0;
-	while (split[i])
+	printf("inside free_split 1\n");
+	while (split[i] != NULL)
 	{
 		free(split[i]);
+		split[i] = NULL;
+		printf("inside free_split %d\n", i);
 		i++;
 	}
 	free(split);
+	split = NULL;
+	printf("returning 0 from free_split\n");
 	return (0);
 }
 
@@ -149,7 +158,7 @@ int	check_element_count(t_element_count *element_count, int flag)
 {
 	if (element_count->ambient > 1)
 		return (0);
-	if (element_count->camera > 1)
+	if (element_count->camera > 3)
 		return (0);
 	if (element_count->light > 3)
 		return (0);

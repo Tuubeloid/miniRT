@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 20:27:57 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/18 20:28:47 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:54:18 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,12 @@ int	setup_ambient(char **split, t_map *map)
 		return (0);
 	rgb = ft_split(split[2], ',');
 	if (rgb == NULL)
-	{
-		free(split);
 		return (0);
-	}
 	map->ambient->ratio = ft_atof(split[1]);
 	map->ambient->r = ft_atoi(rgb[0]);
 	map->ambient->g = ft_atoi(rgb[1]);
 	map->ambient->b = ft_atoi(rgb[2]);
-	free(rgb);
-	free(split);
+	free_split(rgb);
 	printf("%f\n%d\n%d\n%d\n", map->ambient->ratio, map->ambient->r, map->ambient->g, map->ambient->b);
 	printf("end of setup_ambient\n");
 	return (1);

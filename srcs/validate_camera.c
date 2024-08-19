@@ -6,7 +6,7 @@
 /*   By: tvalimak <tvalimak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 18:05:28 by tvalimak          #+#    #+#             */
-/*   Updated: 2024/08/18 21:17:17 by tvalimak         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:57:47 by tvalimak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ int vectors_check(char *str)
         }
         i++;
     }
-    printf("returning 1 from vectors_check\n");
     free_split(split);
+    printf("returning 1 from vectors_check\n");
     return (1);
 }
 
